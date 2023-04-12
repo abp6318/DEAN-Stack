@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcrypt');
-const router = express.Router();
-const neo4j_calls = require('../../neo4j_calls/neo4j_api');
 const jwt = require('jsonwebtoken');
+const neo4j_calls = require('../../neo4j_calls/neo4j_api');
+const router = express.Router();
 
 function generateToken(email) {
     const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '3h' });
