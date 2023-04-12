@@ -23,7 +23,7 @@ const seasonRoute = require('./routes/season/season.js');
 const episodeRoute = require('./routes/episode/episode.js');
 
 app.use('/', defaultRoute);
-// app.use('/login', loginRoute);
+app.use('/login', loginRoute);
 app.use('/tvshow', tvshowRoute);
 app.use('/tvshows', tvshowsRoute);
 // app.use('/season', seasonRoute);

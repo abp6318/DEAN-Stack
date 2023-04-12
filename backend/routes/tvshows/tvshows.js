@@ -13,7 +13,7 @@ const neo4j_calls = require('../../neo4j_calls/neo4j_api');
 // TODO: Reformat result?
 router.get('/', async (req, res) => {
     try {
-        let result = await neo4j_calls.get_all_nodes();
+        let result = await neo4j_calls.get_all_tvshows_and_sub_nodes();
         res.json(result);
         res.status(200);
         res.end();
