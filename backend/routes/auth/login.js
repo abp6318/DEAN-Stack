@@ -3,6 +3,12 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const neo4j_calls = require('../../neo4j_calls/neo4j_api');
+const jwt = require('jsonwebtoken');
+
+function generateToken(email) {
+    const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '3h' });
+    return token;
+}
 
 /**
  * http://localhost:3001/login
@@ -21,7 +27,8 @@ router.post('/', async (req, res) => {
         let user = await neo4j_calls.get_user(email);
         const hashedPassword = user.records[0]._fields[0].properties.password;
         if (user && await bcrypt.compareSync(password, hashedPassword, 10)) {
-            res.json({"token": "12345"});
+            const token = generateToken(email);
+            res.json({"token": token});
             res.status(200);
             res.end();
         } else {
