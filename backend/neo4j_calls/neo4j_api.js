@@ -40,3 +40,15 @@ exports.get_user = async function (email, password) {
     session.close();
     return result;
 };
+
+exports.create_tvshow = async function (email, title, time) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (u:User { email: "'+email+'" })'+
+        'CREATE (t:TVShow {title: "'+title+'"})' +
+        'CREATE (u)-[:ADDED {timeAdded: "'+time+'"}]->(t)',
+        {}
+    );
+    session.close();
+    return result;
+};

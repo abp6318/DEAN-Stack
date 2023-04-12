@@ -5,6 +5,11 @@ const jwt = require('jsonwebtoken');
 const neo4j_calls = require('../../neo4j_calls/neo4j_api');
 const router = express.Router();
 
+/**
+ * Generates a token for a user with their email and a super secret password!
+ * @param email - a users email... duh
+ * @returns a token needed for special API requests
+ */
 function generateToken(email) {
     const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '3h' });
     return token;
