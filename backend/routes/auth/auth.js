@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
-    const token = authHeader.split(" ")[1] || req.body.token || req.query.token;
+    const token = (authHeader && authHeader.split(" ")[1]) || req.body.token || req.query.token;
   
     if (!token) {
         res.json({ message: "Missing token" });
@@ -25,9 +25,11 @@ const verifyToken = (req, res, next) => {
         // The token is valid and belongs to the correct user
         next();
     } catch (error) {
-        res.json({ message: "Invalid token" });
-        res.status(401);
-        res.end();
+        if (!res.writableEnded) {
+            res.json({ message: "Invalid token" });
+            res.status(401);
+            res.end();
+        }
     }
 }
 

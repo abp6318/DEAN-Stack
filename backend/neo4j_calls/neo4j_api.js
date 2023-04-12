@@ -52,3 +52,17 @@ exports.create_tvshow = async function (email, title, time) {
     session.close();
     return result;
 };
+
+exports.update_tvshow = async function (email, id, title, time) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (t:TVShow) where id(t)='+id+' ' +
+        'MATCH (u:User { email: "'+email+'" }) ' +
+        'SET t.title = "'+title+'"' +
+        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(t)' +
+        'return u,r,t',
+        {}
+    );
+    session.close();
+    return result;
+};

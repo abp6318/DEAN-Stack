@@ -57,4 +57,34 @@ router.post('/', verifyToken, async (req, res, next) => {
     }
 });
 
+/**
+ * http://localhost:3001/tvshow (requires body and token)
+ * 
+ * Create a new show with a title and log who added the show to the database
+ * @param email - a user's email
+ * @param id - the ID for the Neo4j object being modified
+ * @param title - the new title for the modified show
+ */
+// TODO: Change result to not be so revealing!
+// TODO: Logging
+// TODO: Error checking
+// TODO: Better error messages
+// TODO: Validation of user input
+router.put('/', verifyToken, async (req, res, next) => {
+    try {
+        const { email, id, title } = req.body;
+        const today = new Date();
+        const time = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+        let result = await neo4j_calls.update_tvshow(email, id, title, time);
+        res.json(result);
+        res.status(200);
+        res.end();
+    } catch (error) {
+        console.log(error);
+        res.json({"error": "Something went wrong!"});
+        res.status(500);
+        res.end();
+    }
+});
+
 module.exports = router;
