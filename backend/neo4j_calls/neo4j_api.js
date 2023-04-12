@@ -66,3 +66,16 @@ exports.update_tvshow = async function (email, id, title, time) {
     session.close();
     return result;
 };
+
+exports.delete_tvshow = async function (id) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (tvshow:TVShow) where id(tvshow)='+id+' ' +
+        'OPTIONAL MATCH (season:Season)-[:SEASON_OF]->(tvshow)' +
+        'OPTIONAL MATCH (episode:Episode)-[:EPISODE_OF]->(season)' +
+        'DETACH DELETE tvshow, season, episode',
+        {}
+    );
+    session.close();
+    return result;
+};

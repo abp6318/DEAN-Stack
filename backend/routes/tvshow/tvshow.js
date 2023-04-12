@@ -87,4 +87,31 @@ router.put('/', verifyToken, async (req, res, next) => {
     }
 });
 
+/**
+ * http://localhost:3001/tvshow (requires body and token)
+ * 
+ * Create a new show with a title and log who added the show to the database
+ * @param email - a user's email
+ * @param id - the ID for the Neo4j object being modified
+ */
+// TODO: Change result to not be so revealing!
+// TODO: Logging
+// TODO: Error checking
+// TODO: Better error messages
+// TODO: Validation of user input
+router.delete('/', verifyToken, async (req, res, next) => {
+    try {
+        const { id } = req.body;
+        let result = await neo4j_calls.delete_tvshow(id);
+        res.json(result);
+        res.status(200);
+        res.end();
+    } catch (error) {
+        console.log(error);
+        res.json({"error": "Something went wrong!"});
+        res.status(500);
+        res.end();
+    }
+});
+
 module.exports = router;
