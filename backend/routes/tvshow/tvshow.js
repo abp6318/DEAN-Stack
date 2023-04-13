@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const neo4j_calls = require('../../neo4j_calls/neo4j_api');
+const logger = require('../auth/logging').logger;
 const verifyToken = require('../auth/auth');
 
 /**
@@ -10,7 +11,6 @@ const verifyToken = require('../auth/auth');
  * Get all TVShow by title
  * @param title: String
  */
-// TODO: Add logging
 // TODO: Add validation
 // TODO: Add error checking
 // TODO: Reformat result?
@@ -25,6 +25,12 @@ router.get('/', async (req, res) => {
         res.json({"error": "Something went wrong!"});
         res.status(500);
         res.end();
+    } finally {
+        logger.log({
+            level: 'info',
+            endpoint: 'GET /tvshow',
+            email: req.body.email || req.query.email || "No email provided / User not logged in"
+        });
     }
 });
 
@@ -32,11 +38,10 @@ router.get('/', async (req, res) => {
  * http://localhost:3001/tvshow (requires body and token)
  * 
  * Create a new show with a title and log who added the show to the database
- * @param email - a user's email
- * @param title - the title for the new show
+ * @param email: String - a user's email
+ * @param title: String - the title for the new show
  */
 // TODO: Change result to not be so revealing!
-// TODO: Logging
 // TODO: Error checking
 // TODO: Better error messages
 // TODO: Validation of user input
@@ -54,6 +59,12 @@ router.post('/', verifyToken, async (req, res, next) => {
         res.json({"error": "Something went wrong!"});
         res.status(500);
         res.end();
+    } finally {
+        logger.log({
+            level: 'info',
+            endpoint: 'POST /tvshow',
+            email: req.body.email || req.query.email || "No email provided / User not logged in"
+        });
     }
 });
 
@@ -61,12 +72,11 @@ router.post('/', verifyToken, async (req, res, next) => {
  * http://localhost:3001/tvshow (requires body and token)
  * 
  * Create a new show with a title and log who added the show to the database
- * @param email - a user's email
- * @param id - the ID for the Neo4j object being modified
- * @param title - the new title for the modified show
+ * @param email: String - a user's email
+ * @param id: Int - the ID for the Neo4j object being modified
+ * @param title: String - the new title for the modified show
  */
 // TODO: Change result to not be so revealing!
-// TODO: Logging
 // TODO: Error checking
 // TODO: Better error messages
 // TODO: Validation of user input
@@ -84,6 +94,12 @@ router.put('/', verifyToken, async (req, res, next) => {
         res.json({"error": "Something went wrong!"});
         res.status(500);
         res.end();
+    } finally {
+        logger.log({
+            level: 'info',
+            endpoint: 'PUT /tvshow',
+            email: req.body.email || req.query.email || "No email provided / User not logged in"
+        });
     }
 });
 
@@ -91,11 +107,10 @@ router.put('/', verifyToken, async (req, res, next) => {
  * http://localhost:3001/tvshow (requires body and token)
  * 
  * Create a new show with a title and log who added the show to the database
- * @param email - a user's email
- * @param id - the ID for the Neo4j object being modified
+ * @param email: String - a user's email
+ * @param id: Int - the ID for the Neo4j object being modified
  */
 // TODO: Change result to not be so revealing!
-// TODO: Logging
 // TODO: Error checking
 // TODO: Better error messages
 // TODO: Validation of user input
@@ -111,6 +126,12 @@ router.delete('/', verifyToken, async (req, res, next) => {
         res.json({"error": "Something went wrong!"});
         res.status(500);
         res.end();
+    } finally {
+        logger.log({
+            level: 'info',
+            endpoint: 'DELETE /tvshow',
+            email: req.body.email || req.query.email || "No email provided / User not logged in"
+        });
     }
 });
 
