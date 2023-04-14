@@ -66,7 +66,22 @@ exports.create_season = async function (email, seasonNumber, summary, tvshowId, 
     return result;
 };
 
-exports.update_tvshow = async function (email, id, title, time) {
+exports.update_tvshow = async function (email, id, seasonNumber, summary, time) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (s:Season) where id(s)='+id+' ' +
+        'MATCH (u:User { email: "'+email+'" }) ' +
+        'SET s.seasonNumber = "'+seasonNumber+'"' +
+        'SET s.summary = "'+summary+'"' +
+        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(s)' +
+        'return u, s, r',
+        {}
+    );
+    session.close();
+    return result;
+};
+
+exports.update_season = async function (email, id, title, time) {
     let session = driver.session();
     const result = await session.run(
         'MATCH (t:TVShow) where id(t)='+id+' ' +
