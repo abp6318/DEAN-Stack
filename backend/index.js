@@ -12,20 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(CookieParser());
 app.use(cors({origin: '*'}));
 
-// used for making other routes secure
-const auth = require('./routes/auth/auth.js');
-
 const defaultRoute = require('./routes/default.js');
 const loginRoute = require('./routes/auth/login.js');
 const tvshowRoute = require('./routes/tvshow/tvshow.js');
-const tvshowsRoute = require('./routes/tvshows/tvshows.js');
 const seasonRoute = require('./routes/season/season.js');
 const episodeRoute = require('./routes/episode/episode.js');
 
 app.use('/', defaultRoute);
 app.use('/login', loginRoute);
 app.use('/tvshow', tvshowRoute);
-app.use('/tvshows', tvshowsRoute);
 // app.use('/season', seasonRoute);
 // app.use('/episode', episodeRoute);
 

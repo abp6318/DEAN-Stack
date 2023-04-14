@@ -16,10 +16,17 @@ const verifyToken = require('../auth/auth');
 // TODO: Reformat result?
 router.get('/', async (req, res) => {
     try {
-        let result = await neo4j_calls.get_tvshow(req.query.title);
-        res.json(result);
-        res.status(200);
-        res.end();
+        if (req.query.title) {
+            let result = await neo4j_calls.get_tvshow(req.query.title);
+            res.json(result);
+            res.status(200);
+            res.end();
+        } else {
+            let result = await neo4j_calls.get_all_tvshows_and_sub_nodes();
+            res.json(result);
+            res.status(200);
+            res.end();
+        }
     } catch (error) {
         console.log(error);
         res.json({"error": "Something went wrong!"});
