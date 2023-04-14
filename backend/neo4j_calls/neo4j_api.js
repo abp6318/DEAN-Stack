@@ -81,14 +81,28 @@ exports.create_episode = async function (email, airDate, episodeNumber, plot, ti
     return result;
 };
 
-exports.update_tvshow = async function (email, id, seasonNumber, summary, time) {
+exports.update_tvshow = async function (email, id, title, time) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (t:TVShow) where id(t)='+id+' ' +
+        'MATCH (u:User { email: "'+email+'" }) ' +
+        'SET t.title = "'+title+'" ' +
+        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(t) ' +
+        'return u,r,t',
+        {}
+    );
+    session.close();
+    return result;
+};
+
+exports.update_season = async function (email, id, seasonNumber, summary, time) {
     let session = driver.session();
     const result = await session.run(
         'MATCH (s:Season) where id(s)='+id+' ' +
         'MATCH (u:User { email: "'+email+'" }) ' +
-        'SET s.seasonNumber = "'+seasonNumber+'"' +
-        'SET s.summary = "'+summary+'"' +
-        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(s)' +
+        'SET s.seasonNumber = '+seasonNumber+' ' +
+        'SET s.summary = "'+summary+'" ' +
+        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(s) ' +
         'return u, s, r',
         {}
     );
@@ -96,14 +110,17 @@ exports.update_tvshow = async function (email, id, seasonNumber, summary, time) 
     return result;
 };
 
-exports.update_season = async function (email, id, title, time) {
+exports.update_episode = async function (email, airDate, episodeNumber, plot, title, id, time) {
     let session = driver.session();
     const result = await session.run(
-        'MATCH (t:TVShow) where id(t)='+id+' ' +
+        'MATCH (e:Episode) where id(e)='+id+' ' +
         'MATCH (u:User { email: "'+email+'" }) ' +
-        'SET t.title = "'+title+'"' +
-        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(t)' +
-        'return u,r,t',
+        'SET e.airDate = "'+airDate+'" ' +
+        'SET e.episodeNumber = '+episodeNumber+' ' +
+        'SET e.plot = "'+plot+'" ' +
+        'SET e.title = "'+title+'" ' +
+        'CREATE (u)-[r:UPDATED {timeUpdated: "'+time+'"}]->(e)' +
+        'return u,r,e',
         {}
     );
     session.close();

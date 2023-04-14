@@ -59,7 +59,7 @@ router.put('/', verifyToken, async (req, res, next) => {
         const { email, id, seasonNumber, summary } = req.body;
         const today = new Date();
         const time = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-        let result = await neo4j_calls.update_tvshow(email, id, seasonNumber, summary, time);
+        let result = await neo4j_calls.update_season(email, id, seasonNumber, summary, time);
         res.json(result);
         res.status(200);
         res.end();
