@@ -22,7 +22,7 @@ app.use('/', defaultRoute);
 app.use('/login', loginRoute);
 app.use('/tvshow', tvshowRoute);
 app.use('/season', seasonRoute);
-// app.use('/episode', episodeRoute);
+app.use('/episode', episodeRoute);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port} 😳 💩 😉 🐔 :-þ`);

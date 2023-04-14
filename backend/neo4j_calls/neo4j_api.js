@@ -52,6 +52,7 @@ exports.create_tvshow = async function (email, title, time) {
     session.close();
     return result;
 };
+
 exports.create_season = async function (email, seasonNumber, summary, tvshowId, time) {
     let session = driver.session();
     const result = await session.run(
@@ -60,6 +61,20 @@ exports.create_season = async function (email, seasonNumber, summary, tvshowId, 
         'CREATE (s:Season {seasonNumber: '+seasonNumber+', summary: "'+summary+'"}) ' +
         'CREATE (s)-[:SEASON_OF]->(t) ' +
         'CREATE (u)-[:ADDED {timeAdded: "'+time+'"}]->(s)',
+        {}
+    );
+    session.close();
+    return result;
+};
+
+exports.create_episode = async function (email, airDate, episodeNumber, plot, title, seasonId, time) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (u:User { email: "'+email+'" }) ' +
+        'MATCH (s:Season) WHERE id(s)='+seasonId+' ' +
+        'CREATE (e:Episode {airDate: "'+airDate+'", episodeNumber: '+episodeNumber+', plot: "'+plot+'", title: "'+title+'"}) ' +
+        'CREATE (e)-[:EPISODE_OF]->(s) ' +
+        'CREATE (u)-[:ADDED {timeAdded: "'+time+'"}]->(e)',
         {}
     );
     session.close();
