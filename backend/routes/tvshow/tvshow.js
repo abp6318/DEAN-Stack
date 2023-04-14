@@ -6,6 +6,7 @@ const logger = require('../auth/logging').logger;
 const verifyToken = require('../auth/auth');
 
 /**
+ * http://localhost:3001/tvshow
  * http://localhost:3001/tvshow?title=My%20TV%20Show
  * 
  * Get all TVShow by title

@@ -21,7 +21,7 @@ const episodeRoute = require('./routes/episode/episode.js');
 app.use('/', defaultRoute);
 app.use('/login', loginRoute);
 app.use('/tvshow', tvshowRoute);
-// app.use('/season', seasonRoute);
+app.use('/season', seasonRoute);
 // app.use('/episode', episodeRoute);
 
 app.listen(port, () => {
