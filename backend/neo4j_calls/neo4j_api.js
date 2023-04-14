@@ -151,3 +151,14 @@ exports.delete_season = async function (id) {
     session.close();
     return result;
 };
+
+exports.delete_episode = async function (id) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (episode:Episode) where id(episode)='+id+' ' +
+        'DETACH DELETE episode',
+        {}
+    );
+    session.close();
+    return result;
+};
