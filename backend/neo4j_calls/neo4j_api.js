@@ -99,9 +99,21 @@ exports.delete_tvshow = async function (id) {
     let session = driver.session();
     const result = await session.run(
         'MATCH (tvshow:TVShow) where id(tvshow)='+id+' ' +
-        'OPTIONAL MATCH (season:Season)-[:SEASON_OF]->(tvshow)' +
-        'OPTIONAL MATCH (episode:Episode)-[:EPISODE_OF]->(season)' +
+        'OPTIONAL MATCH (season:Season)-[:SEASON_OF]->(tvshow) ' +
+        'OPTIONAL MATCH (episode:Episode)-[:EPISODE_OF]->(season) ' +
         'DETACH DELETE tvshow, season, episode',
+        {}
+    );
+    session.close();
+    return result;
+};
+
+exports.delete_season = async function (id) {
+    let session = driver.session();
+    const result = await session.run(
+        'MATCH (season:Season) where id(season)='+id+' ' +
+        'OPTIONAL MATCH (episode:Episode)-[:EPISODE_OF]->(season) ' +
+        'DETACH DELETE season, episode',
         {}
     );
     session.close();

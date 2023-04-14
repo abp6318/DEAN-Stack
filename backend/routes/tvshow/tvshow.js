@@ -114,7 +114,7 @@ router.put('/', verifyToken, async (req, res, next) => {
 /**
  * http://localhost:3001/tvshow (requires body and token)
  * 
- * Create a new show with a title and log who added the show to the database
+ * Delete a tvshow and all related subnodes from the database
  * @param email: String - a user's email
  * @param id: Int - the ID for the Neo4j object being modified
  */
