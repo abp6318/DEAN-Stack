@@ -7,7 +7,6 @@ import Cookies from 'universal-cookie';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-
 export class LoginComponent {
 
   async onSubmit(event: Event) {
