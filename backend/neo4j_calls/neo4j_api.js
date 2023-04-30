@@ -29,13 +29,15 @@ exports.get_tvshow = async function (title) {
     return result;
 };
 
-exports.get_user = async function (email, password) {
+exports.get_user = async function (email) {
     let session = driver.session();
     const result = await session.run(
-        'MATCH (u:User)' +
-        'WHERE u.email = "'+email+'"' +
-        'return u',
-        {}
+        `
+        MATCH (u:User)  
+        WHERE u.email = $email  
+        return u
+        `,
+        { email: email }
     );
     session.close();
     return result;
@@ -44,10 +46,12 @@ exports.get_user = async function (email, password) {
 exports.create_tvshow = async function (email, title, time) {
     let session = driver.session();
     const result = await session.run(
-        'MATCH (u:User { email: "'+email+'" })'+
-        'CREATE (t:TVShow {title: "'+title+'"})' +
-        'CREATE (u)-[:ADDED {timeAdded: "'+time+'"}]->(t)',
-        {}
+        `
+        MATCH (u:User { email: $email })
+        CREATE (t:TVShow {title: $title})
+        CREATE (u)-[:ADDED {timeAdded: $time}]->(t)
+        `,
+        { email: email, title: title, time: time}
     );
     session.close();
     return result;

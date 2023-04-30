@@ -19,12 +19,12 @@ router.get('/', async (req, res) => {
     try {
         if (req.query.title) {
             let result = await neo4j_calls.get_tvshow(req.query.title);
-            res.json(result);
+            res.json(result.records);
             res.status(200);
             res.end();
         } else {
             let result = await neo4j_calls.get_all_tvshows_and_sub_nodes();
-            res.json(result);
+            res.json(result.records);
             res.status(200);
             res.end();
         }

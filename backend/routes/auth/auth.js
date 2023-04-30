@@ -18,6 +18,9 @@ const verifyToken = (req, res, next) => {
         const userEmail = decoded.email;
         const requestEmail = req.body.email || req.query.email; // Or whichever request parameter the email is passed in
     
+        // check decoded expiration date is valid (based on current datetime)
+        // check decoded email is valid (from database)
+        // instead of ...
         if (userEmail !== requestEmail) {
             res.json({ message: "Unauthorized" });
             res.status(403);
