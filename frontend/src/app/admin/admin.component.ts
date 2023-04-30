@@ -8,52 +8,47 @@ import Cookies from 'universal-cookie';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  // async onSubmit(event: Event) {
-  //   event.preventDefault();
-
-  //   const BASE_URL = environment.apiUrl;
-  //   const cookies = new Cookies();
-  //   // const user = cookies.get('user');
-
-  //   const target = event.target as HTMLFormElement;
-  //   const email = (target[0] as HTMLInputElement).value;
-  //   const password = (target[1] as HTMLInputElement).value;
-
-  //   let myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
-
-  //   const raw = JSON.stringify({
-  //     "email": email,
-  //     "password": password,
-  //   });
-
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: raw,
-  //   };
-
-  //   await fetch(`${BASE_URL}/login`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(function(result) {
-  //       const options = {
-  //         path: '/',
-  //         sameSite: true,
-  //         expires: new Date(Date.now()+86400000) // expires in one dayish
-  //       };
-  //       const newCookie = {
-  //         email: email,
-  //         token: result.token,
-  //       }
-  //       cookies.set('user', JSON.stringify(newCookie), options);
-  //     })
-  //     .catch(function(error) {
-  //       console.log('error', error);
-  //     });
-  // }
 
   async onSubmitPostTVShow(event: Event) {
-    // TODO: email and title
+    event.preventDefault();
+
+    const BASE_URL = environment.apiUrl;
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+
+    if (user) {
+      console.log("user logged in");
+      const email = user.email;
+      const token = user.token;
+      const target = event.target as HTMLFormElement;
+      const title = (target[0] as HTMLInputElement).value;
+
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("authorization", "Bearer " + token);
+
+      const raw = JSON.stringify({
+        "email": email,
+        "title": title,
+      });
+
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+      };
+
+      await fetch(`${BASE_URL}/tvshow`, requestOptions)
+        .then(response => response.json())
+        .then(function(result) {
+          console.log(result);
+        })
+        .catch(function(error) {
+          console.log('error', error);
+        });
+    } else {
+      console.log("need to redirect to login");
+    }
   }
 
   async onSubmitPutTVShow(event: Event) {
