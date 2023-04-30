@@ -18,11 +18,11 @@ const tvshowRoute = require('./routes/tvshow/tvshow.js');
 const seasonRoute = require('./routes/season/season.js');
 const episodeRoute = require('./routes/episode/episode.js');
 
-app.use('/', defaultRoute);
-app.use('/login', loginRoute);
-app.use('/tvshow', tvshowRoute);
-app.use('/season', seasonRoute);
-app.use('/episode', episodeRoute);
+app.use('/api/', defaultRoute);
+app.use('/api/login', loginRoute);
+app.use('/api/tvshow', tvshowRoute);
+app.use('/api/season', seasonRoute);
+app.use('/api/episode', episodeRoute);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port} 😳 💩 😉 🐔 :-þ`);
