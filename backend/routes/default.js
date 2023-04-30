@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * http://localhost:3001/
+ * http://localhost:3001/api/
  * 
  * Default route
  * @params none

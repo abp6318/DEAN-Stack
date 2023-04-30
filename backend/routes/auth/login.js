@@ -16,7 +16,7 @@ function generateToken(email) {
 }
 
 /**
- * http://localhost:3001/login
+ * http://localhost:3001/api/login
  * 
  * Login and get a token back!
  * @param email - takes in an email - must be a valid email

@@ -6,7 +6,7 @@ const logger = require('../auth/logging').logger;
 const verifyToken = require('../auth/auth');
 
 /**
- * http://localhost:3001/season (requires body and token)
+ * http://localhost:3001/api/season (requires body and token)
  * 
  * Create a new season!
  * @param email: String - a user's email
@@ -42,7 +42,7 @@ router.post('/', verifyToken, async (req, res, next) => {
 });
 
 /**
- * http://localhost:3001/season (requires body and token)
+ * http://localhost:3001/api/season (requires body and token)
  * 
  * Update a season and log who modified the database
  * @param email: String - a user's email
@@ -78,7 +78,7 @@ router.put('/', verifyToken, async (req, res, next) => {
 });
 
 /**
- * http://localhost:3001/season (requires body and token)
+ * http://localhost:3001/api/season (requires body and token)
  * 
  * Delete a season and all related subnodes from the database
  * @param email: String - a user's email

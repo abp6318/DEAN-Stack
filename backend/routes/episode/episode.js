@@ -6,7 +6,7 @@ const logger = require('../auth/logging').logger;
 const verifyToken = require('../auth/auth');
 
 /**
- * http://localhost:3001/episode (requires body and token)
+ * http://localhost:3001/api/episode (requires body and token)
  * 
  * Create a new episode!
  * @param email: String - a user's email
@@ -44,7 +44,7 @@ router.post('/', verifyToken, async (req, res, next) => {
 });
 
 /**
- * http://localhost:3001/episode (requires body and token)
+ * http://localhost:3001/api/episode (requires body and token)
  * 
  * Update an episode and log who modified the database
  * @param email: String - a user's email
@@ -82,7 +82,7 @@ router.put('/', verifyToken, async (req, res, next) => {
 });
 
 /**
- * http://localhost:3001/episode (requires body and token)
+ * http://localhost:3001/api/episode (requires body and token)
  * 
  * Delete a episode and all related subnodes from the database
  * @param email: String - a user's email

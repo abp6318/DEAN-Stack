@@ -6,8 +6,8 @@ const logger = require('../auth/logging').logger;
 const verifyToken = require('../auth/auth');
 
 /**
- * http://localhost:3001/tvshow
- * http://localhost:3001/tvshow?title=My%20TV%20Show
+ * http://localhost:3001/api/tvshow
+ * http://localhost:3001/api/tvshow?title=My%20TV%20Show
  * 
  * Get all TVShow by title
  * @param title: String
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * http://localhost:3001/tvshow (requires body and token)
+ * http://localhost:3001/api/tvshow (requires body and token)
  * 
  * Create a new show with a title and log who added the show to the database
  * @param email: String - a user's email
@@ -77,7 +77,7 @@ router.post('/', verifyToken, async (req, res, next) => {
 });
 
 /**
- * http://localhost:3001/tvshow (requires body and token)
+ * http://localhost:3001/api/tvshow (requires body and token)
  * 
  * Update a show's title and log who modified the database
  * @param email: String - a user's email
@@ -112,7 +112,7 @@ router.put('/', verifyToken, async (req, res, next) => {
 });
 
 /**
- * http://localhost:3001/tvshow (requires body and token)
+ * http://localhost:3001/api/tvshow (requires body and token)
  * 
  * Delete a tvshow and all related subnodes from the database
  * @param email: String - a user's email
