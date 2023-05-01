@@ -353,11 +353,103 @@ export class AdminComponent implements OnInit {
   }
 
   async onSubmitPostEpisode(event: Event) {
-    // TODO: email, seasonId, airDate, episodeNumber, plot and title
+    event.preventDefault();
+
+    const BASE_URL = environment.apiUrl;
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+
+    if (user) {
+      const email = user.email;
+      const token = user.token;
+      const target = event.target as HTMLFormElement;
+      const seasonId = (target[0] as HTMLInputElement).value;
+      const title = (target[1] as HTMLInputElement).value;
+      const episodeNumber = (target[2] as HTMLInputElement).value;
+      const plot = (target[3] as HTMLInputElement).value;
+      const airDate = (target[4] as HTMLInputElement).value;
+
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("authorization", "Bearer " + token);
+
+      const raw = JSON.stringify({
+        "email": email,
+        "airDate": airDate,
+        "episodeNumber": parseInt(episodeNumber),
+        "plot": plot,
+        "title": title,
+        "seasonId": parseInt(seasonId),
+      });
+
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+      };
+
+      await fetch(`${BASE_URL}/episode`, requestOptions)
+        .then(response => response.json())
+        .then(function(result) {
+          console.log(result);
+          alert("New episode created!");
+        })
+        .catch(function(error) {
+          console.log('error', error);
+        });
+    } else {
+      console.log("need to redirect to login");
+    }
   }
 
   async onSubmitPutEpisode(event: Event) {
-    // TODO: email, episodeId, airDate, episodeNumber, plot and title
+    event.preventDefault();
+
+    const BASE_URL = environment.apiUrl;
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+
+    if (user) {
+      const email = user.email;
+      const token = user.token;
+      const target = event.target as HTMLFormElement;
+      const episodeId = (target[0] as HTMLInputElement).value;
+      const title = (target[1] as HTMLInputElement).value;
+      const episodeNumber = (target[2] as HTMLInputElement).value;
+      const plot = (target[3] as HTMLInputElement).value;
+      const airDate = (target[4] as HTMLInputElement).value;
+
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("authorization", "Bearer " + token);
+
+      const raw = JSON.stringify({
+        "email": email,
+        "airDate": airDate,
+        "episodeNumber": parseInt(episodeNumber),
+        "plot": plot,
+        "title": title,
+        "id": parseInt(episodeId),
+      });
+
+      const requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+      };
+      
+      await fetch(`${BASE_URL}/episode`, requestOptions)
+        .then(response => response.json())
+        .then(function(result) {
+          console.log(result);
+          alert("Episode updated!");
+        })
+        .catch(function(error) {
+          console.log('error', error);
+        });
+    } else {
+      console.log("need to redirect to login");
+    }
   }
 
   async onSubmitDeleteEpisode(event: Event) {

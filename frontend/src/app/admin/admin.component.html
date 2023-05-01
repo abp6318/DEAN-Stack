@@ -121,20 +121,84 @@
     <input type="submit" value="Delete">
 </form>
 
+<hr>
 
+<h3>Create New Episode</h3>
+<form (submit)="onSubmitPostEpisode($event)">
+    <label for="seasonToAddTo">Season to add to: </label>
+    <select name="seasonToAddTo" id="seasonToAddTo">
+        <option 
+            *ngFor="let item of seasons" 
+            value='{{ item.seasonId }}'
+        >
+            {{ item.parentTVShow.title }} (tvshowId:{{ item.parentTVShow.tvshowId }}) - Season {{ item.seasonNumber }} (seasonId:{{ item.seasonId }})
+        </option>
+    </select><br>
 
+    <input 
+        type="text" 
+        name="title" 
+        id="title" 
+        placeholder="Title" 
+    ><br>
+
+    <input 
+        type="number" 
+        name="episodeNumber" 
+        id="episodeNumber" 
+        placeholder="Episode Number"
+        min="1" 
+    ><br>
+
+    <textarea id="plot" name="plot" rows="4" cols="30" placeholder="Plot"></textarea><br>
+
+    <input 
+        type="date" 
+        name="airdate" 
+        id="airdate" 
+    ><br>
+
+    <input type="submit" value="Create">
+</form>
 
 <hr>
-<ul>
-    <li *ngFor="let item of tvshows">{{ item.title }} -- {{ item.tvshowId }}</li>
-</ul>
 
-<hr>
-<ul>
-    <li *ngFor="let item of seasons">{{ item.summary }} -- {{ item.seasonNumber }} -- {{ item.seasonId }}</li>
-</ul>
+<h3>Update  Episode</h3>
+<form (submit)="onSubmitPutEpisode($event)">
+    <label for="episodeToUpdate">Episode to update: </label>
+    <select name="episodeToUpdate" id="episodeToUpdate">
+        <option 
+            *ngFor="let item of episodes" 
+            value='{{ item.episodeId }}'
+        >
+            {{ item.parentTVShow.title }} (tvshowId:{{ item.parentTVShow.tvshowId }}) - Season {{ item.parentSeason.seasonNumber }} (seasonId:{{ item.parentSeason.seasonId }}) - {{ item.title }} (ep. {{ item.episodeNumber }}) (id:{{ item.episodeId }})
+        </option>
+    </select><br>
 
-<hr>
-<ul>
-    <li *ngFor="let item of episodes">{{ item.episodeId }} -- get other things here!</li>
-</ul>
+    <input 
+        type="text" 
+        name="title" 
+        id="title" 
+        placeholder="Title" 
+    ><br>
+
+    <input 
+        type="number" 
+        name="episodeNumber" 
+        id="episodeNumber" 
+        placeholder="Episode Number"
+        min="1" 
+    ><br>
+
+    <textarea id="plot" name="plot" rows="4" cols="30" placeholder="Plot"></textarea><br>
+
+    <input 
+        type="date" 
+        name="airdate" 
+        id="airdate" 
+    ><br>
+
+    <input type="submit" value="Create">
+</form>
+
+<br><br><br>
