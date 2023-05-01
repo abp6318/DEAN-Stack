@@ -265,7 +265,49 @@ export class AdminComponent implements OnInit {
   }
 
   async onSubmitPutSeason(event: Event) {
-    // TODO: email, seasonId, seasonNumber and summary
+    event.preventDefault();
+
+    const BASE_URL = environment.apiUrl;
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+
+    if (user) {
+      const email = user.email;
+      const token = user.token;
+      const target = event.target as HTMLFormElement;
+      const seasonId = (target[0] as HTMLInputElement).value;
+      const seasonNumber = (target[1] as HTMLInputElement).value;
+      const summary = (target[2] as HTMLInputElement).value;
+
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("authorization", "Bearer " + token);
+
+      const raw = JSON.stringify({
+        "email": email,
+        "summary": summary,
+        "seasonNumber": parseInt(seasonNumber),
+        "id": parseInt(seasonId),
+      });
+
+      const requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+      };
+
+      await fetch(`${BASE_URL}/season`, requestOptions)
+        .then(response => response.json())
+        .then(function(result) {
+          console.log(result);
+          alert("Season updated!");
+        })
+        .catch(function(error) {
+          console.log('error', error);
+        });
+    } else {
+      console.log("need to redirect to login");
+    }
   }
 
   async onSubmitDeleteSeason(event: Event) {
