@@ -101,7 +101,24 @@
 
     <textarea id="summary" name="summary" rows="4" cols="30" placeholder="Summary"></textarea><br>
 
-    <input type="submit" value="Create">
+    <input type="submit" value="Update">
+</form>
+
+<hr>
+
+<h3>Delete Season</h3>
+<form (submit)="onSubmitDeleteSeason($event)">
+    <label for="seasonToDelete">Season to update: </label>
+    <select name="seasonToDelete" id="seasonToDelete">
+        <option 
+            *ngFor="let item of seasons" 
+            value='{{ item.seasonId }}'
+        >
+            {{ item.parentTVShow.title }} (tvshowId:{{ item.parentTVShow.tvshowId }}) - Season {{ item.seasonNumber }} (seasonId:{{ item.seasonId }})
+        </option>
+    </select><br>
+
+    <input type="submit" value="Delete">
 </form>
 
 
