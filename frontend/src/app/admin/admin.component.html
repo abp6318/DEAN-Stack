@@ -50,7 +50,32 @@
     <input type="submit" value="Delete">
 </form>
 
+<hr>
 
+<h3>Create New Season</h3>
+<form (submit)="onSubmitPostSeason($event)">
+    <label for="tvshowToAddSeasonTo">Select a show to add a season to: </label>
+    <select name="tvshowToAddSeasonTo" id="tvshowToAddSeasonTo">
+        <option 
+            *ngFor="let item of tvshows" 
+            value='{{ item.tvshowId }}'
+        >
+            {{ item.title }} (id:{{ item.tvshowId }})
+        </option>
+    </select><br>
+
+    <input 
+        type="number" 
+        name="seasonNumber" 
+        id="seasonNumber" 
+        placeholder="Season Number"
+        min="1" 
+    ><br>
+
+    <textarea id="summary" name="summary" rows="4" cols="30" placeholder="Summary"></textarea><br>
+
+    <input type="submit" value="Create">
+</form>
 
 
 
