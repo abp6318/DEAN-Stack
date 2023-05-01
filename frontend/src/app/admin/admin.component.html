@@ -15,11 +15,20 @@
 
 <h3>Edit TV Show</h3>
 <form (submit)="onSubmitPutTVShow($event)">
+    <label for="tvshowBeingEdited">Select a show to edit: </label>
+    <select name="tvshowBeingEdited" id="tvshowBeingEdited">
+        <option 
+            *ngFor="let item of tvshows" 
+            value='{{ item.tvshowId }}'
+        >
+            {{ item.title }} (id:{{ item.tvshowId }})
+        </option>
+    </select><br>
     <input 
         type="text" 
         name="title" 
         id="title" 
-        placeholder="Title" 
+        placeholder="New Title" 
     ><br>
     
     <input type="submit" value="Submit">
