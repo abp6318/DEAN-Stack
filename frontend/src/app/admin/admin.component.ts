@@ -97,7 +97,6 @@ export class AdminComponent implements OnInit {
   }
 
   async onSubmitPutTVShow(event: Event) {
-    // TODO: email, tvshowId and title
     event.preventDefault();
 
     const BASE_URL = environment.apiUrl;
@@ -142,7 +141,45 @@ export class AdminComponent implements OnInit {
   }
 
   async onSubmitDeleteTVShow(event: Event) {
-    // TODO: email and tvshowId
+    event.preventDefault();
+
+    const BASE_URL = environment.apiUrl;
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+
+    if (user) {
+      const email = user.email;
+      const token = user.token;
+      const target = event.target as HTMLFormElement;
+      const tvshowId = (target[0] as HTMLInputElement).value;
+
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("authorization", "Bearer " + token);
+
+      const raw = JSON.stringify({
+        "email": email,
+        "id": parseInt(tvshowId)
+      });
+
+      const requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
+      };
+
+      await fetch(`${BASE_URL}/tvshow`, requestOptions)
+        .then(response => response.json())
+        .then(function(result) {
+          console.log(result);
+          alert("Show deleted!");
+        })
+        .catch(function(error) {
+          console.log('error', error);
+        });
+    } else {
+      console.log("need to redirect to login");
+    }
   }
 
   async onSubmitPostSeason(event: Event) {

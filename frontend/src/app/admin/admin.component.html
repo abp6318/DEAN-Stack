@@ -8,7 +8,7 @@
         id="title" 
         placeholder="Title" 
     ><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Create">
 </form>
 
 <hr>
@@ -31,8 +31,29 @@
         placeholder="New Title" 
     ><br>
     
-    <input type="submit" value="Submit">
+    <input type="submit" value="Update">
 </form>
+
+<hr>
+
+<h3>Delete TV Show</h3>
+<form (submit)="onSubmitDeleteTVShow($event)">
+    <label for="tvshowBeingDeleted">Select a show to delete: </label>
+    <select name="tvshowBeingDeleted" id="tvshowBeingDeleted">
+        <option 
+            *ngFor="let item of tvshows" 
+            value='{{ item.tvshowId }}'
+        >
+            {{ item.title }} (id:{{ item.tvshowId }})
+        </option>
+    </select><br>
+    <input type="submit" value="Delete">
+</form>
+
+
+
+
+
 
 <hr>
 <ul>
