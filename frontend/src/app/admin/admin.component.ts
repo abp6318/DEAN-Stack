@@ -25,7 +25,6 @@ export class AdminComponent implements OnInit {
       for (let index=0; index<data.length; index++) {
         const item = data[index]._fields;
         for (let itemIndex=0; itemIndex<item.length; itemIndex++) {
-          // console.log(item[itemIndex]);
           const label = item[itemIndex]?.labels?.[0];
           if (label === "TVShow") {
             const title = item[itemIndex]?.properties?.title;
@@ -51,7 +50,6 @@ export class AdminComponent implements OnInit {
             }
           }
         }
-        // console.log(this.seasons);
       }
     });
   }
@@ -64,7 +62,6 @@ export class AdminComponent implements OnInit {
     const user = cookies.get('user');
 
     if (user) {
-      console.log("user logged in");
       const email = user.email;
       const token = user.token;
       const target = event.target as HTMLFormElement;

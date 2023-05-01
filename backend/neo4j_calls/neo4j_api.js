@@ -9,7 +9,7 @@ exports.get_all_tvshows_and_sub_nodes = async function () {
         'MATCH (t:TVShow)' +
         'OPTIONAL MATCH (s:Season)-[:SEASON_OF]->(t)' +
         'OPTIONAL MATCH (e:Episode)-[:EPISODE_OF]->(s)' +
-        'RETURN t, s, e',
+        'RETURN t, s, e, id(t), id(s), id(e)',
         {}
     );    
     session.close();

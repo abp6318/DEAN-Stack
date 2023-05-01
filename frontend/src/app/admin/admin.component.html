@@ -21,11 +21,14 @@
         id="title" 
         placeholder="Title" 
     ><br>
-    <ul>
-        <li *ngFor="let item of tvshows">{{ item.title }} -- {{ item.tvshowId }}</li>
-    </ul>
+    
     <input type="submit" value="Submit">
 </form>
+
+<hr>
+<ul>
+    <li *ngFor="let item of tvshows">{{ item.title }} -- {{ item.tvshowId }}</li>
+</ul>
 
 <hr>
 <ul>
