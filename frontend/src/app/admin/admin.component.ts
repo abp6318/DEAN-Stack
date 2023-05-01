@@ -22,6 +22,7 @@ export class AdminComponent implements OnInit {
     this.episodes = [];
     await this.http.get<any[]>(environment.apiUrl + '/tvshow').subscribe((data) => {
       this.data = data;
+      console.log(data);
       for (let index=0; index<data.length; index++) {
         const item = data[index]._fields;
         for (let itemIndex=0; itemIndex<item.length; itemIndex++) {
@@ -36,8 +37,20 @@ export class AdminComponent implements OnInit {
             const summary = item[itemIndex]?.properties?.summary;
             const seasonNumber = item[itemIndex]?.properties?.seasonNumber.low;
             const seasonId = item[itemIndex + 3]?.low
+
+            const title = item[itemIndex - 1]?.properties?.title;
+            const tvshowId = item[itemIndex + 2]?.low
+
             if (!this.seasons.map(season => season.seasonId ).includes(seasonId)){
-              this.seasons = [...this.seasons, { "summary": summary, "seasonNumber": seasonNumber, "seasonId": seasonId }];
+              this.seasons = [...this.seasons, { 
+                "summary": summary, 
+                "seasonNumber": seasonNumber, 
+                "seasonId": seasonId, 
+                "parentTVShow": {
+                  "title": title,
+                  "tvshowId": tvshowId,
+                } 
+              }];
             }
           } else if (label === "Episode") {
             const plot = item[itemIndex]?.properties?.plot;
@@ -45,8 +58,31 @@ export class AdminComponent implements OnInit {
             const title = item[itemIndex]?.properties?.title;
             const episodeNumber = item[itemIndex]?.properties?.episodeNumber.low;
             const episodeId = item[itemIndex + 3]?.low
+
+            const tvshowTitle = item[itemIndex - 2]?.properties?.title;
+            const tvshowId = item[itemIndex + 1]?.low
+
+            const summary = item[itemIndex - 1]?.properties?.summary;
+            const seasonNumber = item[itemIndex - 1]?.properties?.seasonNumber.low;
+            const seasonId = item[itemIndex + 2]?.low
+
             if (!this.episodes.map(episode => episode.episodeId ).includes(episodeId)){
-              this.episodes = [...this.episodes, { "plot": plot, "airDate": airDate, "title": title, "episodeNumber": episodeNumber, "episodeId": episodeId }];
+              this.episodes = [...this.episodes, { 
+                "plot": plot, 
+                "airDate": airDate, 
+                "title": title, 
+                "episodeNumber": episodeNumber, 
+                "episodeId": episodeId,
+                "parentTVShow": {
+                  "title": tvshowTitle,
+                  "tvshowId": tvshowId,
+                },
+                "parentSeason": {
+                  "summary": summary,
+                  "seasonNumber": seasonNumber,
+                  "seasonId": seasonId,
+                }
+              }];
             }
           }
         }

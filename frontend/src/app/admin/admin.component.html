@@ -77,6 +77,33 @@
     <input type="submit" value="Create">
 </form>
 
+<hr>
+
+<h3>Update Season</h3>
+<form (submit)="onSubmitPutSeason($event)">
+    <label for="seasonToUpdate">Season to update: </label>
+    <select name="seasonToUpdate" id="seasonToUpdate">
+        <option 
+            *ngFor="let item of seasons" 
+            value='{{ item.seasonId }}'
+        >
+            {{ item.parentTVShow.title }} (tvshowId:{{ item.parentTVShow.tvshowId }}) - Season {{ item.seasonNumber }} (seasonId:{{ item.seasonId }})
+        </option>
+    </select><br>
+
+    <input 
+        type="number" 
+        name="seasonNumber" 
+        id="seasonNumber" 
+        placeholder="Season Number"
+        min="1" 
+    ><br>
+
+    <textarea id="summary" name="summary" rows="4" cols="30" placeholder="Summary"></textarea><br>
+
+    <input type="submit" value="Create">
+</form>
+
 
 
 
