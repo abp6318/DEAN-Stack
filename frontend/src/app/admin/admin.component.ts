@@ -454,5 +454,44 @@ export class AdminComponent implements OnInit {
 
   async onSubmitDeleteEpisode(event: Event) {
     // TODO: email and episodeId
+    event.preventDefault();
+
+    const BASE_URL = environment.apiUrl;
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+
+    if (user) {
+      const email = user.email;
+      const token = user.token;
+      const target = event.target as HTMLFormElement;
+      const episodeId = (target[0] as HTMLInputElement).value;
+
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("authorization", "Bearer " + token);
+
+      const raw = JSON.stringify({
+        "email": email,
+        "id": parseInt(episodeId),
+      });
+
+      const requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
+      };
+
+      await fetch(`${BASE_URL}/episode`, requestOptions)
+        .then(response => response.json())
+        .then(function(result) {
+          console.log(result);
+          alert("Episode deleted!");
+        })
+        .catch(function(error) {
+          console.log('error', error);
+        });
+    } else {
+      console.log("need to redirect to login");
+    }
   }
 }

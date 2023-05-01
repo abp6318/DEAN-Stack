@@ -163,7 +163,7 @@
 
 <hr>
 
-<h3>Update  Episode</h3>
+<h3>Update Episode</h3>
 <form (submit)="onSubmitPutEpisode($event)">
     <label for="episodeToUpdate">Episode to update: </label>
     <select name="episodeToUpdate" id="episodeToUpdate">
@@ -198,7 +198,24 @@
         id="airdate" 
     ><br>
 
-    <input type="submit" value="Create">
+    <input type="submit" value="Update">
+</form>
+
+<hr>
+
+<h3>Delete Episode</h3>
+<form (submit)="onSubmitDeleteEpisode($event)">
+    <label for="episodeToUpdate">Episode to delete: </label>
+    <select name="episodeToUpdate" id="episodeToUpdate">
+        <option 
+            *ngFor="let item of episodes" 
+            value='{{ item.episodeId }}'
+        >
+            {{ item.parentTVShow.title }} (tvshowId:{{ item.parentTVShow.tvshowId }}) - Season {{ item.parentSeason.seasonNumber }} (seasonId:{{ item.parentSeason.seasonId }}) - {{ item.title }} (ep. {{ item.episodeNumber }}) (id:{{ item.episodeId }})
+        </option>
+    </select><br>
+
+    <input type="submit" value="Delete">
 </form>
 
 <br><br><br>
