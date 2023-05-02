@@ -106,7 +106,8 @@ export class HomeComponent {
       const node = {
         "tag": this.tvshows[index].title,
         "type": "TVShow",
-        "id": this.tvshows[index].tvshowId
+        "id": this.tvshows[index].tvshowId,
+        "tvshow": this.tvshows[index],
       }
       nodesToReturn.push(node);
     }
@@ -115,7 +116,8 @@ export class HomeComponent {
       const node = {
         "tag": "Season " + this.seasons[index].seasonNumber,
         "type": "Season",
-        "id": this.seasons[index].seasonId
+        "id": this.seasons[index].seasonId,
+        "season": this.seasons[index],
       }
       nodesToReturn.push(node);
       const sourceNodeIndex = nodesToReturn.length - 1
@@ -131,7 +133,8 @@ export class HomeComponent {
       const node = {
         "tag": "Episode " + this.episodes[index].episodeNumber + ": " + this.episodes[index].title,
         "type": "Episode",
-        "id": this.episodes[index].episode
+        "id": this.episodes[index].episode,
+        "episode": this.episodes[index],
       }
       nodesToReturn.push(node);
       const sourceNodeIndex = nodesToReturn.length - 1
@@ -290,8 +293,10 @@ export class HomeComponent {
             alert("GOING TO TVSHOW: ");
           } else if (d.target.__data__.type === "Season"){
             alert("SEASON INFO: ");
+            // TODO
           } else if (d.target.__data__.type === "Episode"){
             alert("EPISODE INFO: ");
+            // TODO
           } 
         })
         .attr('x', function(d:any) {
