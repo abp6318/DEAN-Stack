@@ -94,44 +94,7 @@ export class HomeComponent {
       console.log("episodes: ", this.episodes);
       this.convertToNodesAndLinks();
       this.renderSimulation(this.myNodes, this.myLinks);
-      // this.renderSimulationExample();
-      // this.renderSimulation(
-      //   [
-      //     {
-      //       "tag": "Breaking Bad Demo",
-      //       "type": "TVShow",
-      //     },
-      //     {
-      //       "tag": "Season 1",
-      //       "type": "Season",
-      //     },
-      //     {
-      //       "tag": "First",
-      //       "type": "Episode",
-      //     },
-      //     {
-      //       "tag": "Second",
-      //       "type": "Episode",
-      //     },
-      //   ],
-      //   [
-      //     {
-      //       "source": 1,
-      //       "target": 0
-      //     },
-      //     {
-      //       "source": 2,
-      //       "target": 1
-      //     },
-      //     {
-      //       "source": 3,
-      //       "target": 1
-      //     },
-      //   ]
-      // );
-    });
-
-    
+    }); 
   }
 
   // Source for concept: https://www.d3indepth.com/force-layout/ 
@@ -286,8 +249,12 @@ export class HomeComponent {
   }
 
   renderSimulation(nodes:any, links:any) {
-    const width = 2000;
-    const height = 2000;
+    // const width = 1000;
+    // const height = 1000;
+    var body = document.body;
+    var html = document.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )
+    var width = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth ) 
 
     function updateLinks() {
       var u = d3.select('.links')
@@ -316,6 +283,16 @@ export class HomeComponent {
         .join('text')
         .text(function(d:any) {
           return d.tag
+        })
+        .on("click", function(d) { 
+          // TODO: Make this do different things for each type of object
+          if (d.target.__data__.type === "TVShow") {
+            alert("GOING TO TVSHOW: ");
+          } else if (d.target.__data__.type === "Season"){
+            alert("SEASON INFO: ");
+          } else if (d.target.__data__.type === "Episode"){
+            alert("EPISODE INFO: ");
+          } 
         })
         .attr('x', function(d:any) {
           return d.x
@@ -358,12 +335,19 @@ export class HomeComponent {
       updateLinks();
     }
 
+    // const svg = d3.select("#graph").append("svg")
+    //   .attr("width", "100%").attr("height", "100%")
+    //   .attr("pointer-events", "all");
 
     var simulation = d3.forceSimulation(nodes as SimulationNodeDatum[])
       .force('charge', d3.forceManyBody().strength(-100))
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('link', d3.forceLink().links(links))
+      .force('collision', d3.forceCollide().radius(4))
       .on('tick', ticked);
+
+    
+
   }
 
 }
