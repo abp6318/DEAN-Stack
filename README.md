@@ -107,7 +107,19 @@ tar -xvf <tar-name-here
 ```
 
 ### Accessing Outside VPS
-1. TODO
+1. Open package.json in nano (or Vi). This file tells the Angular CLI how to interpret commands that you’re going to use,
+such as `“start”` for starting up/building the app. Change the line that says `"start": "ng serve"`, to `"start": "ng build &&
+node ./bin/www"`.
+
+2. Open the firewall for the frontend on whatever port you chose to run it on (I like 4200).
+```
+sudo firewall-cmd --zone=public --add-port=4200/tcp --permanent
+```
+
+3. Reload the firewall.
+```
+sudo firewall-cmd --reload
+```
 
 
 ### Other Commands Used
@@ -116,6 +128,7 @@ In no particular order...
 npm init
 npm install <node-package-name>
 npm install -g @angular/cli
+ng new <app-name>
 ng serve
 ng generate component <component-name>
 ng generate environments
