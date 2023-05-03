@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// SOMETHING ABOUT THIS NEEDS TO BE FIXED
+// DOESN'T WORK (YET)
+
 /**
  * Module dependencies.
  */
@@ -17,6 +20,7 @@ var path = require('path');
 
 var port = normalizePort('4200');
 app.set('port', port);
+app.use(express.static(path.join(__dirname, 'dist/frontend')));
 app.use('/', express.static(path.join(__dirname, 'dist/frontend')));
 app.use('/login', express.static(path.join(__dirname, 'dist/frontend')));
 app.use('/admin', express.static(path.join(__dirname, 'dist/frontend')));

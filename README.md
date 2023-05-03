@@ -66,7 +66,7 @@ cp .env.example .env
 
 4. Fill out the `.env` now
   - `PORT` is fine as 3001 (unless you plan on running something else there)
-  - `NEO4JURI` is `bolt://localhost:7687` by default for me -- and whatever it is for you should appear at the top of the client that appears when you click "Open" in Neo4j Desktop
+  - `NEO4JURI` is `bolt://127.0.0.1:7687` by default for me -- and whatever it is for you should appear at the top of the client that appears when you click "Open" in Neo4j Desktop
   - `NEO4JUSERNAME` is `neo4j` but I believe you can change this
   - `NEO4JPASSWORD` is whatever you set it to. For the sake of my demo in class, I'm doing `password` :P
   - `SECRET_KEY` is for your JWT tokens! This is to ensure API calls are authenticated. Make your own key with one of the [256-bit WEP keys from this site](https://randomkeygen.com/) or any other you like! I'm including mine in the `.env.example` so login works on local and on production.
@@ -107,13 +107,18 @@ tar -xvf <tar-name-here
 ```
 
 ### Accessing Outside VPS
+
+**Note** - I couldn't get the frontend to work outside the VPS, only the backend.
+
 1. Open package.json in nano (or Vi). This file tells the Angular CLI how to interpret commands that you’re going to use,
 such as `“start”` for starting up/building the app. Change the line that says `"start": "ng serve"`, to `"start": "ng build &&
 node ./bin/www"`.
 
-2. Open the firewall for the frontend on whatever port you chose to run it on (I like 4200).
+2. Open the firewall for the frontend on whatever port you chose to run it on (I like 4200 for frontend and 3001 for backend).
 ```
 sudo firewall-cmd --zone=public --add-port=4200/tcp --permanent
+sudo firewall-cmd --zone=public --add-port=3001/tcp --permanent
+sudo firewall-cmd --zone=public --add-port=7687/tcp --permanent
 ```
 
 3. Reload the firewall.
