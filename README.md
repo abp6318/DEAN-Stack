@@ -10,7 +10,7 @@ For the sake of this project's requirements, everything I do will be for the Roc
 sudo yum install git
 git --version
 ```
-- Install Node (note: this command on RLES should cover installation of Node)
+- Install Node (note: this command on RLES should cover installation of Node BUT if later you run into a version issue, install NVM and run `nvm install --lts` to get the latest version of Node)
 ```
 node --version
 ```
@@ -57,6 +57,7 @@ git clone https://github.com/abp6318/DEAN-Stack.git && cd ./DEAN-Stack/backend
 ```
 npm i
 ```
+Note: You might need to add `sudo` to the start of that or run it more than once. Sometimes NPM is weird.
 
 3. Copy the `.env.example` file as a new file called `.env`
 ```
@@ -69,4 +70,54 @@ cp .env.example .env
   - `NEO4JUSERNAME` is `neo4j` but I believe you can change this
   - `NEO4JPASSWORD` is whatever you set it to. For the sake of my demo in class, I'm doing `password` :P
   - `SECRET_KEY` is for your JWT tokens! This is to ensure API calls are authenticated. Make your own key with one of the [256-bit WEP keys from this site](https://randomkeygen.com/) or any other you like! I'm including mine in the `.env.example` so login works on local and on production.
+
+5. Start the `/backend`.
+```
+npm start
+```
+
+
+### Frontend
+1. Clone the repository (if you haven't already) and change into the `/frontend` directory.
+```
+git clone https://github.com/abp6318/DEAN-Stack.git && cd ./DEAN-Stack/frontend
+```
+
+2. Install the Node modules.
+```
+npm i
+```
+Note: You might need to add `sudo` to the start of that or run it more than once. Sometimes NPM is weird.
+
+3. Start the client.
+```
+npm start
+```
+
+
+### Postman
+1. Run this first
+```
+sudo dnf install libXScrnSaver
+```
+
+2. Download and login to Postman: [https://www.postman.com/downloads/](https://www.postman.com/downloads/)
+```
+tar -xvf <tar-name-here
+```
+
+### Accessing Outside VPS
+1. TODO
+
+
+### Other Commands Used
+In no particular order...
+```
+npm init
+npm install <node-package-name>
+npm install -g @angular/cli
+ng serve
+ng generate component <component-name>
+ng generate environments
+```
 
