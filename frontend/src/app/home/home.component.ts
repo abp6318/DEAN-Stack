@@ -292,12 +292,6 @@ export class HomeComponent {
           if (d.target.__data__.type === "TVShow") {
             alert("GOING TO TVSHOW: " + d.target.__data__.tag);
             window.location.href = "/tvshow/" + d.target.__data__.tag;
-          } else if (d.target.__data__.type === "Season"){
-            alert("SEASON INFO: ");
-            // TODO
-          } else if (d.target.__data__.type === "Episode"){
-            alert("EPISODE INFO: ");
-            // TODO
           } 
         })
         .attr('x', function(d:any) {

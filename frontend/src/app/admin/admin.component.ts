@@ -127,6 +127,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -171,6 +172,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -213,6 +215,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -259,6 +262,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -305,6 +309,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -347,6 +352,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -397,6 +403,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
@@ -447,13 +454,13 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }
   }
 
   async onSubmitDeleteEpisode(event: Event) {
-    // TODO: email and episodeId
     event.preventDefault();
 
     const BASE_URL = environment.apiUrl;
@@ -490,6 +497,7 @@ export class AdminComponent implements OnInit {
         .catch(function(error) {
           console.log('error', error);
         });
+      location.reload();
     } else {
       console.log("need to redirect to login");
     }

@@ -1,1 +1,15 @@
-<p>tvshow works!</p>
+<h1 
+    *ngFor="let item of tvshows"
+>
+    {{ item.title }}
+</h1>
+
+<ul>
+    <div
+        *ngFor="let item of episodes"
+    >
+        <li><strong>S{{ item.parentSeason.seasonNumber}} E{{ item.episodeNumber }}:</strong> {{ item.title }}</li>
+        <div style="padding-left: 1em;"><li>Air Date: {{ item.airDate }}</li></div>
+        <div style="padding-left: 1em;"><li>Plot: {{ item.plot }}</li></div>
+    </div>
+</ul>

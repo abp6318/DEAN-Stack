@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -103,6 +102,9 @@ export class TvshowComponent {
       console.log("shows: ", this.tvshows);
       console.log("seasons: ", this.seasons);
       console.log("episodes: ", this.episodes);
+
+      this.episodes = this.episodes.sort((a, b) => (a.parentSeason.seasonNumber > b.parentSeason.seasonNumber) ? 1 : (a.parentSeason.seasonNumber === b.parentSeason.seasonNumber) ? ((a.episodeNumber > b.episodeNumber) ? 1 : -1) : -1 )
+
     }); 
   }
 }

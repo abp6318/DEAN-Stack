@@ -14,7 +14,6 @@ export class LoginComponent {
 
     const BASE_URL = environment.apiUrl;
     const cookies = new Cookies();
-    // const user = cookies.get('user');
 
     const target = event.target as HTMLFormElement;
     const email = (target[0] as HTMLInputElement).value;
@@ -47,6 +46,7 @@ export class LoginComponent {
           token: result.token,
         }
         cookies.set('user', JSON.stringify(newCookie), options);
+        location.reload();
       })
       .catch(function(error) {
         console.log('error', error);
