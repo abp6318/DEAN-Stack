@@ -42,3 +42,27 @@ chmod u+x ./path/to/AppImage
 
 9. Paste the contents of `neo4j_dump.txt` inside the database prompt and click the play button.
 
+
+### Backend - Node and Express
+1. Clone the repository (if you haven't already) and change into the `/backend` directory.
+```
+git clone https://github.com/abp6318/DEAN-Stack.git && cd ./DEAN-Stack/backend
+```
+
+2. Install the Node modules.
+```
+npm i
+```
+
+3. Copy the `.env.example` file as a new file called `.env`
+```
+cp .env.example .env
+```
+
+4. Fill out the `.env` now
+  - `PORT` is fine as 3001 (unless you plan on running something else there)
+  - `NEO4JURI` is `bolt://localhost:7687` by default for me -- and whatever it is for you should appear at the top of the client that appears when you click "Open" in Neo4j Desktop
+  - `NEO4JUSERNAME` is `neo4j` but I believe you can change this
+  - `NEO4JPASSWORD` is whatever you set it to. For the sake of my demo in class, I'm doing `password` :P
+  - `SECRET_KEY` is for your JWT tokens! This is to ensure API calls are authenticated. Make your own key with one of the [256-bit WEP keys from this site](https://randomkeygen.com/) or any other you like!
+
