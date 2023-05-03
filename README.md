@@ -77,7 +77,7 @@ npm start
 ```
 
 
-### Frontend
+### Frontend - Angular and D3.js
 1. Clone the repository (if you haven't already) and change into the `/frontend` directory.
 ```
 git clone https://github.com/abp6318/DEAN-Stack.git && cd ./DEAN-Stack/frontend
@@ -89,7 +89,7 @@ npm i
 ```
 Note: You might need to add `sudo` to the start of that or run it more than once. Sometimes NPM is weird.
 
-3. Start the client.
+3. Start the `/frontend`.
 ```
 npm start
 ```
