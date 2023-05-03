@@ -38,5 +38,7 @@ chmod u+x ./path/to/AppImage
 
 7. The default username for your database will be `neo4j`, but it's up to you to pick your password. Whatever password you choose will be later placed in your `.env` file in the `/backend` directory. Passwords for your database can be easily reset through the Neo4j Desktop app.
 
+8. Start your database, wait for it to finish loading, open it and go and fetch the database dump I have in the backend: [https://github.com/abp6318/DEAN-Stack/blob/main/backend/neo4j_calls/neo4j_dump.txt](https://github.com/abp6318/DEAN-Stack/blob/main/backend/neo4j_calls/neo4j_dump.txt)
 
+9. Paste the contents of `neo4j_dump.txt` inside the database prompt and click the play button.
 
