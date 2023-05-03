@@ -147,7 +147,7 @@ CREATE (lib:TVShow {title: "Love is Blind"})
     CREATE (libS4:Season {seasonNumber: 4, summary: "Yikes. -Vicky"})-[:SEASON_OF]->(lib)
 
         CREATE (:Episode {episodeNumber: 1, title: "Welcome to the Pods!", airDate: "2023-03-24", plot: "As singles begin a new round of voice-only dating, intersecting love triangles take shape that may lead to heartache down the line."})-[:EPISODE_OF]->(libS4)
-        CREATE (:Episode {episodeNumber: 2, title: "Birthday Wishes", airDate: "2023-03-24", plot: ""})-[:EPISODE_OF]->(libS4)
+        CREATE (:Episode {episodeNumber: 2, title: "Birthday Wishes", airDate: "2023-03-24", plot: "In a situation during which romantic rivals are also roommates, hard choices lead to hard feelings; two couples take the plunge and get engaged."})-[:EPISODE_OF]->(libS4)
         CREATE (:Episode {episodeNumber: 3, title: "Is Love Really Blind?", airDate: "2023-03-24", plot: "More proposals lead to eye-opening and emotional first meetings; one man wrestles with a painful choice between two very different women."})-[:EPISODE_OF]->(libS4)
         CREATE (:Episode {episodeNumber: 4, title: "Playing With Fire", airDate: "2023-03-24", plot: "Five newly minted pairs arrive at a luxurious resort in Mexico, where things go swimmingly for some while others struggle to stay afloat."})-[:EPISODE_OF]->(libS4)
         CREATE (:Episode {episodeNumber: 5, title: "Paradise Lost", airDate: "2023-03-24", plot: "An intense pool party conversation has a lasting ripple effect during the next day's dates; one couple's doubts lead to a drastic decision."})-[:EPISODE_OF]->(libS4)

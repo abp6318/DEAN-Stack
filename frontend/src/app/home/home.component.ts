@@ -290,7 +290,8 @@ export class HomeComponent {
         .on("click", function(d) { 
           // TODO: Make this do different things for each type of object
           if (d.target.__data__.type === "TVShow") {
-            alert("GOING TO TVSHOW: ");
+            alert("GOING TO TVSHOW: " + d.target.__data__.tag);
+            window.location.href = "/tvshow/" + d.target.__data__.tag;
           } else if (d.target.__data__.type === "Season"){
             alert("SEASON INFO: ");
             // TODO
@@ -340,18 +341,12 @@ export class HomeComponent {
       updateLinks();
     }
 
-    // const svg = d3.select("#graph").append("svg")
-    //   .attr("width", "100%").attr("height", "100%")
-    //   .attr("pointer-events", "all");
-
     var simulation = d3.forceSimulation(nodes as SimulationNodeDatum[])
       .force('charge', d3.forceManyBody().strength(-100))
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('link', d3.forceLink().links(links))
       .force('collision', d3.forceCollide().radius(4))
       .on('tick', ticked);
-
-    
 
   }
 

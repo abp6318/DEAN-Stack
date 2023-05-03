@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
+import { TvshowComponent } from './tvshow/tvshow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    TvshowComponent
   ],
   imports: [
     HttpClientModule,

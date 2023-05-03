@@ -22,7 +22,7 @@ exports.get_tvshow = async function (title) {
         'MATCH (t:TVShow {title: "'+title+'"})' +
         'OPTIONAL MATCH (s:Season)-[:SEASON_OF]->(t)' +
         'OPTIONAL MATCH (e:Episode)-[:EPISODE_OF]->(s)' +
-        'RETURN t, s, e',
+        'RETURN t, s, e, id(t), id(s), id(e)',
         {}
     );
     session.close();
