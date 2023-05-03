@@ -6,6 +6,10 @@ For the sake of this project's requirements, everything I do will be for the Roc
 
 ### Prerequisites
 - Install Git
+```
+sudo yum install git
+git --version
+```
 - Install Node (note: this command on RLES should cover installation of Node)
 ```
 node --version
@@ -64,5 +68,5 @@ cp .env.example .env
   - `NEO4JURI` is `bolt://localhost:7687` by default for me -- and whatever it is for you should appear at the top of the client that appears when you click "Open" in Neo4j Desktop
   - `NEO4JUSERNAME` is `neo4j` but I believe you can change this
   - `NEO4JPASSWORD` is whatever you set it to. For the sake of my demo in class, I'm doing `password` :P
-  - `SECRET_KEY` is for your JWT tokens! This is to ensure API calls are authenticated. Make your own key with one of the [256-bit WEP keys from this site](https://randomkeygen.com/) or any other you like!
+  - `SECRET_KEY` is for your JWT tokens! This is to ensure API calls are authenticated. Make your own key with one of the [256-bit WEP keys from this site](https://randomkeygen.com/) or any other you like! I'm including mine in the `.env.example` so login works on local and on production.
 
